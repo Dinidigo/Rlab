@@ -1,0 +1,72 @@
+Imagine that, you have been tasked with creating a program that
+calculates and assigns grades for students enrolled in multiple
+courses. The program will take input for the marks obtained by 10
+students in 5 different courses, compute the total and average
+marks for each student, and assign corresponding grades based on
+their average performance.
+Declare constants for the number of students (num_students) and
+the number of courses (num_courses).
+Initialize an empty list to store student information.
+For each student:
+• Input the student's name.
+• Input marks for each of the 5 courses.
+• Calculate the total marks and average marks.
+• Determine the grade based on the average marks using a
+grading scale.
+• Display the student information, including their name,
+individual course marks, total marks, average marks, and the
+assigned grade.
+
+Code in R:
+# Constants
+num_students <- 10
+num_courses <- 5
+
+# Predefined student names
+student_names <- c("John", "Anna", "Tim", "Harry", "Pal", "Jim",
+"Peter", "Bob", " Cook", "James")
+
+# Predefined course marks for each student
+course_marks <- matrix(c(
+85, 92, 78, 88, 95, 88, 89, 78,77,81,
+75, 80, 85, 70, 60, 90, 67, 70,89,87,
+100, 78, 56, 34, 56, 45, 78, 97,66,89,
+78, 45, 67, 89, 90, 56, 89, 67,99,98,
+89,80,67,78,90, 67, 78,90, 78, 78
+), nrow = num_students, byrow = TRUE)
+
+# Initialize a list to store student information
+student_records <- list()
+
+# Loop for each student
+for (student_index in 1:num_students) {
+student_name <- student_names[student_index]
+
+# Initialize variables for calculations
+total_marks <- sum(course_marks[student_index, ])
+average_marks <- total_marks / num_courses
+
+# Determine grade based on average marks
+grade <- ifelse(average_marks >= 90, "A",
+ifelse(average_marks >= 80,"B",
+ifelse(average_marks >= 70, "C",
+ifelse(average_marks >= 60, "D", "F"))))
+
+# Store student information in a record
+student_record <- list(name = student_name, marks =
+course_marks[student_index, ],
+total = total_marks, average = average_marks, grade =
+grade)
+
+student_records <- c(student_records, list(student_record))
+}
+
+# Display student information
+cat("\nStudent Grade Report:\n")
+for (student_record in student_records) {
+cat("\nName:", student_record$name, "\n")
+cat("Marks:", student_record$marks, "\n")
+cat("Total Marks:", student_record$total, "\n")
+cat("Average Marks:", student_record$average, "\n")
+cat("Grade:", student_record$grade, "\n")
+}
