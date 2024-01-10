@@ -1,0 +1,51 @@
+Lab Exercise 11: Customer Purchase Analysis 
+You are a data analyst at an e-commerce company that sells a variety of products online.  The company has provided you with a dataset containing information about customer  purchases. Your task is to perform a comprehensive data analysis to gain insights into  customer behaviour and spending patterns. 
+Dataset Description:  
+The dataset customer_purchases.csv contains the following columns: 
+• CustomerID: Unique identifier for each customer. 
+• PurchaseAmount: The amount spent by the customer on a purchase. Problem Tasks: 
+You are required to perform the following tasks using R: 
+• Task 1: Load the Dataset 
+Load the necessary libraries, including readr and dplyr. 
+Read the dataset customer_purchases.csv into a data frame named purchase_data. 
+• Task 2: Data Summary 
+Calculate and display the total number of records in the dataset. 
+Calculate and display the total number of unique customers in the dataset. 
+• Task 3: Calculate Statistical Measures 
+Calculate and display the mean (average) purchase amount. 
+Calculate and display the median purchase amount. 
+Calculate and display the standard deviation of purchase amounts. 
+• Task 4: Customer Segmentation 
+Create a new column named Segment in the purchase_data data frame based on the  following criteria: 
+"Low Spender" if the purchase amount is less than the median. 
+"High Spender" if the purchase amount is greater than or equal to the median. • Task 5: Visualize Data
+
+Create a histogram to visualize the distribution of purchase amounts using the ggplot2  package. Customize the plot with appropriate labels and titles. 
+Solution:- 
+Packages Need to Installed 
+• readr 
+• dplyr 
+Program:- 
+library(readr) 
+library(dplyr) 
+set.seed(42) 
+customer_ids <- 1:100 
+# Generating 100 Random numbers from 10 to 200. 
+purchase_amounts <- runif(100, min = 10, max = 200) 
+dummy_data <- data.frame( 
+ Customer_ID = customer_ids, 
+ Purchase_Amount = purchase_amounts 
+) 
+# Writing into a CSV file customer_purchases.csv 
+write.csv(dummy_data, "customer_purchases.csv", row.names = FALSE) 
+purchase_data <- read_csv("customer_purchases.csv") 
+total_records <- nrow(purchase_data) 
+total_unique_customers <- n_distinct(purchase_data$Customer_ID) cat("Total number of records:", total_records, "\n") 
+cat("Total number of unique customers:", total_unique_customers, "\n") mean_purchase_amount <- mean(purchase_data$Purchase_Amount) median_purchase_amount <- median(purchase_data$Purchase_Amount)
+std_dev_purchase_amount <- sd(purchase_data$Purchase_Amount) 
+cat("Mean purchase amount:", mean_purchase_amount, "\n") 
+cat("Median purchase amount:", median_purchase_amount, "\n") cat("Standard deviation of purchase amounts:", std_dev_purchase_amount,  "\n") 
+#Creating a new column called segment. 
+purchase_data$Segment <- ifelse(purchase_data$Purchase_Amount <  median_purchase_amount, "Low Spender", "High Spender") 
+print(purchase_data) 
+hist(purchase_data$Purchase_Amount, main = "Distribution of Purchase Amounts", xlab = "Purchase Amount", col = "blue", border = "black") 
